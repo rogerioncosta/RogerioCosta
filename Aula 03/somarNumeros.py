@@ -9,7 +9,10 @@ while (contador <= 5):
 
 soma = 0
 
-for numero in listaNumeros:
-    soma += numero
+# for numero in listaNumeros:
+#     soma += numero
+
+for i in range(len(listaNumeros)):
+    soma += listaNumeros[i]
 
 print(f"A soma dos números é: {soma}")
