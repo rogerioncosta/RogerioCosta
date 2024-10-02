@@ -19,18 +19,18 @@ while continua == "s":
 total_salarios = 0
 maior_salario = salarios_funcionarios[0]
 menor_salario = salarios_funcionarios[0]
-salario_funcionario_maior = nomes_funcionarios[0]
-salario_funcionario_menor = nomes_funcionarios[0]
+funcionario_salario_maior = nomes_funcionarios[0]
+funcionario_salario_menor = nomes_funcionarios[0]
 
 for i in range(len(salarios_funcionarios)):
     total_salarios = total_salarios + salarios_funcionarios[i]
     if salarios_funcionarios[i] > maior_salario:
         maior_salario = salarios_funcionarios[i]
-        salario_funcionario_maior = nomes_funcionarios[i]
+        funcionario_salario_maior = nomes_funcionarios[i]
 
     if salarios_funcionarios[i] < menor_salario:
         menor_salario = salarios_funcionarios[i] 
-        salario_funcionario_menor = nomes_funcionarios[i]
+        funcionario_salario_menor = nomes_funcionarios[i]
 
 media = total_salarios / len(salarios_funcionarios)
 
@@ -43,8 +43,8 @@ for i in range(len(nomes_funcionarios)):
 
 print(f"A média salarial da empresa é de: R$ {media:.2f}")
 
-print(f"O maior salário é do(a) funcionário: {salario_funcionario_maior} no valor de R$ {maior_salario:.2f}")
+print(f"O maior salário é do(a) funcionário: {funcionario_salario_maior} no valor de R$ {maior_salario:.2f}")
 
-print(f"O menor salário é do(a) funcionário: {salario_funcionario_menor} no valor de R$ {menor_salario:.2f}")
+print(f"O menor salário é do(a) funcionário: {funcionario_salario_menor} no valor de R$ {menor_salario:.2f}")
 
 print(f"O total de gastos com salários é de: R$ {total_salarios:.2f}")
