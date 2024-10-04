@@ -4,11 +4,15 @@
 # - Mostre uma média geral da turma.
 
 listaAlunos = []
-listaNotas = []
+
+listaAlunosNotas = []
+
+listaNotasTurma = []
 
 continuar = "s"
 
 while continuar == "s":
+    listaNotasAluno = []
     qtde_notas_aluno = 0
     nome_aluno = input("Digite o nome do aluno: ")
     listaAlunos.append(nome_aluno)
@@ -17,11 +21,28 @@ while continuar == "s":
 
     while qtde_notas_aluno < qtde_nota_aluno:
         nota = float(input("Digite a nota: "))
-        listaNotas.append(nota)
+        listaNotasAluno.append(nota)
+        listaNotasTurma.append(nota)
+
         qtde_notas_aluno += 1
+
+    somaNotas = 0
+    for nota in listaNotasAluno:
+        somaNotas += nota
+
+    mediaAluno = somaNotas / qtde_nota_aluno    
+    
+    listaAlunosNotas.append([nome_aluno, mediaAluno]) 
         
     continuar = input("Deseja continuar? (s/n): \n")
 
-    # for i in range(len(listaAlunos)):
-    #     media = listaNotas[i] / len(listaNotas) 
-    #     print(f"O aluno {listaAlunos[i]} obteve a média: {media}:.2f")
+for boletim in listaAlunosNotas:
+    print(f"Aluno: {boletim[0]} - Média {boletim[1]:.2f}")
+
+somaNotasTurma = 0
+for nota in listaNotasTurma:
+    somaNotasTurma += nota
+
+mediaGeralTurma = somaNotasTurma / len(listaNotasTurma)
+
+print(f"A média da turma é: {mediaGeralTurma:.2f}")
