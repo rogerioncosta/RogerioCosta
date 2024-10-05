@@ -68,11 +68,11 @@ while True:
 
 
     if teclas[pygame.K_LEFT]:
-        personagemWalk.x -= 200 * dt # Movimenta pra esquerda
+        personagemRect.x -= 200 * dt # Movimenta pra esquerda
     if teclas[pygame.K_RIGHT]:
-        personagemWalk.x += 200 * dt # Movimenta pra direita
+        personagemRect.x += 200 * dt # Movimenta pra direita
     if teclas[pygame.K_SPACE]:
-        if personagemWalk.centery == 330:
+        if personagemRect.centery == 330:
             gravidade = -30
 
     # Gravidade aumenta
