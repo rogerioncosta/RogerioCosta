@@ -46,14 +46,11 @@ dt = 0
 
 listaBolas = []
 
-listaBolas.append(criarBola())
-listaBolas.append(criarBola())
-listaBolas.append(criarBola())
-listaBolas.append(criarBola())
-listaBolas.append(criarBola())
-listaBolas.append(criarBola())
-listaBolas.append(criarBola())
-listaBolas.append(criarBola())
+# Cria um evento para o usuário adicionar bolas
+ADICIONA_BOLA = pygame.USEREVENT + 1
+
+# Define um timer para adicionar bolas a cada 10 segundos
+pygame.time.set_timer(ADICIONA_BOLA, 100)
 
 while True:
     # Lida com os eventos da aplicação
@@ -61,6 +58,9 @@ while True:
         print(evento)
         if evento.type == pygame.QUIT:
             pygame.quit() # Fechando o pygame
+
+        if evento.type == ADICIONA_BOLA:
+            listaBolas.append(criarBola())
 
     # Preenche a tela com uma cor
     tela.fill((40, 200, 100))
