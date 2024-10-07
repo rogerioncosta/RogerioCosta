@@ -42,17 +42,14 @@ while True:
     # Atualiza a animação do personagem parado
     tempoAnimacaoIdle += dt
 
+    # Verifica se o tempo de animação do personagem parado é maior ou igual ao tempo de animação
     if tempoAnimacaoIdle >= 1 / velocidadeAnimacaoIdle:
-        indexFrameIdle = (indexFrameIdle + 1) % len(framesIdle)
-        tempoAnimacaoIdle = 0.0
-
-    if tempoAnimacaoIdle >= 1 / velocidadeAnimacaoIdle:
+        # Atualiza o frame do personagem parado
         indexFrameIdle = (indexFrameIdle + 1) % len(framesIdle)
         tempoAnimacaoIdle = 0.0
 
     # Movimenta o personagem no eixo X
     teclas = pygame.key.get_pressed()
-
 
     if teclas[pygame.K_LEFT]:
         personagemRect.x -= 200 * dt # Movimenta pra esquerda
