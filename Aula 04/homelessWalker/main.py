@@ -12,10 +12,12 @@ dt = 0
 # Carrega a spritesheet para nosso projeto
 folhaSpritesIdle = pygame.image.load("assets/Homeless_1/Idle.png").convert_alpha()
 folhaSpritesWalk = pygame.image.load("assets/Homeless_1/Walk.png").convert_alpha()
+folhaSpritesJump = pygame.image.load("assets/Homeless_1/Jump.png").convert_alpha()
 
 # Define os frames
 framesIdle = []
 framesWalk = []
+framesJump = []
 
 for i in range(6):
     frame = folhaSpritesIdle.subsurface(i * 128, 0, 128, 128) # A imagem tem 768 largura, e tem 6 imagens que quero dividir
@@ -27,6 +29,11 @@ for i in range(8):
     frame = pygame.transform.scale(frame, (256, 256))
     framesWalk.append(frame)
 
+for i in range(16):
+    frame = folhaSpritesJump.subsurface(i * 128, 0, 128, 128) # A imagem tem 768 largura, e tem 6 imagens que quero dividir
+    frame = pygame.transform.scale(frame, (256, 256))
+    framesJump.append(frame)
+
 # Variáveis da animação do personagem parado
 indexFrameIdle = 0
 tempoAnimacaoIdle = 0.0
@@ -36,9 +43,14 @@ indexFrameWalk = 0
 tempoAnimacaoWalk = 0.0
 velocidadeAnimacaoWalk = 10
 
+indexFrameJump = 0
+tempoAnimacaoJump = 0.0
+velocidadeAnimacaoJump = 10
+
 # Retangulo do personagem
 personagemRect = framesIdle[0].get_rect(midbottom=(100, 480))
 personagemRectWalk = framesWalk[0].get_rect(midbottom=(100, 480))
+personagemRectJump = framesJump[0].get_rect(midbottom=(100, 480))
 
 gravidade = 1
 
@@ -55,6 +67,7 @@ while True:
     # Atualiza a animação do personagem parado
     tempoAnimacaoIdle += dt
     tempoAnimacaoWalk += dt
+    tempoAnimacaoJump += dt
 
     # Verifica se o tempo de animação do personagem parado é maior ou igual ao tempo de animação
     if tempoAnimacaoIdle >= 1 / velocidadeAnimacaoIdle:
@@ -67,6 +80,10 @@ while True:
         indexFrameWalk = (indexFrameWalk + 1) % len(framesWalk)
         tempoAnimacaoWalk = 0.0
 
+    # if tempoAnimacaoJump >= 1 / velocidadeAnimacaoJump:
+    #     # Atualiza o frame do personagem parado
+    #     indexFrameJump = (indexFrameJump + 1) % len(framesJump)
+    #     tempoAnimacaoJump = 0.0
 
     # Movimenta o personagem no eixo X
     teclas = pygame.key.get_pressed()
@@ -80,7 +97,7 @@ while True:
         personagemRectWalk.x += 200 * dt # Movimenta pra direita
         inverte = False
     if teclas[pygame.K_SPACE]:
-        if personagemRect.centery == 330:
+        if personagemRectJump.centery == 330:
             gravidade = -30
 
     # Gravidade aumenta
@@ -88,12 +105,16 @@ while True:
 
     personagemRect.y += gravidade
     personagemRectWalk.y += gravidade
+    personagemRectJump.y += gravidade
 
     if personagemRect.centery >= 330:
         personagemRect.centery = 330
 
     if personagemRectWalk.centery >= 330:
         personagemRectWalk.centery = 330
+
+    if personagemRectJump.centery >= 330:
+        personagemRectJump.centery = 330
 
     # Desenha o personagem    
     if teclas[pygame.K_LEFT]:
@@ -105,12 +126,14 @@ while True:
     elif teclas[pygame.K_RIGHT]:
         pygame.draw.rect(tela, (0, 0, 0), personagemRectWalk, 2)
         tela.blit(framesWalk[indexFrameWalk], personagemRectWalk)
+    elif teclas[pygame.K_SPACE]:
+        pygame.draw.rect(tela, (0, 0, 0), personagemRectJump, 2)
+        tela.blit(framesJump[4], personagemRectJump)
     else:
-        # Desenha o personagem 
+        # Desenha o personagem  
         pygame.draw.rect(tela, (0, 0, 0), personagemRect, 2)
         # Desenha um retangulo em volta do personagem
         tela.blit(framesIdle[indexFrameIdle], personagemRect) 
-
 
     pygame.display.update()
     dt = relogio.tick(60) / 1000
